@@ -9,6 +9,13 @@
   One PowerShell file. No installer, no telemetry, no network access, no "please donate" pop-ups.
 </p>
 
+<p align="center">
+  <img src="screenshots/main-en.png" width="720" alt="Main window: list of installed programs"><br><br>
+  <img src="screenshots/leftovers-en.png" width="720" alt="Leftovers window: folders, registry keys, shortcuts, startup entry and service found after uninstalling Steam">
+</p>
+
+<p align="center"><sub>Screenshots use demo mode (<code>-Demo</code>) with sample data. Türkçe arayüz: <a href="screenshots/main-tr.png">ana pencere</a>, <a href="screenshots/leftovers-tr.png">geride kalanlar</a>.</sub></p>
+
 ---
 
 ## Why
@@ -31,6 +38,10 @@ and trust: run the app's own uninstaller, then show me exactly what's left on di
   and comes with the reason it was matched.
 - **Search for an app you already removed.** Type its name and the tool looks for leftovers from programs you
   uninstalled earlier with other tools.
+- **English and Turkish UI.** The language follows your Windows region on first run. Switch it with the button
+  in the top-right corner, and the choice is remembered in `ayarlar.json`.
+- **Readable Store app names.** `ms-resource:` display names and publishers are resolved from each package with
+  `SHLoadIndirectString`, so you see "Windows Calculator / Microsoft Corporation" rather than a raw package ID.
 
 ## Safety
 
@@ -55,6 +66,9 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\Kaldir.ps1
 
 # dry run: list what would be found for an app, deletes nothing, no admin needed
 powershell -NoProfile -ExecutionPolicy Bypass -File .\Kaldir.ps1 -Deneme -DenemeAd "Discord"
+
+# demo: the full GUI with sample data, nothing is read from or removed on your PC
+powershell -NoProfile -ExecutionPolicy Bypass -File .\Kaldir.ps1 -Demo -Dil en
 ```
 
 To get a desktop shortcut, create one that targets `powershell.exe` with the arguments
@@ -62,7 +76,7 @@ To get a desktop shortcut, create one that targets `powershell.exe` with the arg
 
 The icon is drawn in code with System.Drawing (`ikon-olustur.ps1`) and written as a multi-size `.ico` (16–256 px, PNG-compressed).
 
-> The UI is in Turkish. *Kaldır* means "uninstall", *Kesin* means "certain" and *Muhtemel* means "possible".
+> The code identifiers and comments are in Turkish. *Kaldır* means "uninstall", *Kesin* means "certain" and *Muhtemel* means "possible".
 
 ## How matching works (short version)
 
