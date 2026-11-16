@@ -1,0 +1,4 @@
+# kişisel yedekler ve günlükler (kayıt defteri dışa aktarımları) asla repoya girmez
+yedek/
+*.reg
+*.log
